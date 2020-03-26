@@ -140,5 +140,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- AdminLTE App -->
         <script src="<?php echo BASE_URL ?>app/views/template/adminlte/dist/js/adminlte.min.js"></script>
 
+        <script src="<?php echo BASE_URL ?>app/libs/js/script.js"></script>
+
     </body>
 </html>
