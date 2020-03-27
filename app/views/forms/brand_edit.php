@@ -1,10 +1,10 @@
 <!-- Add-Modal -->
-<div class="modal fade" id="brand-addform" tabindex="-1" role="dialog">
+<div class="modal fade" id="add-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title">Add New Brand</h5>
+                <h5 class="modal-title">Edit Brand</h5>
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
@@ -30,7 +30,7 @@
 
                                 <div class="form-row justify-content-center">
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-dark enviar" name="enviar" onclick="brand_add()">Salvar</button>
+                                        <button type="submit" class="btn btn-dark enviar" name="enviar" onclick="brand_save()">Salvar</button>
                                     </div>
                                 </div>
                             </form>

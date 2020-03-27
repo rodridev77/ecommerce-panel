@@ -20,16 +20,35 @@ class BrandController extends Controller {
     }
 
     public function add() {
-        $brandName = filter_input(INPUT_POST, 'brand-name', FILTER_SANITIZE_STRING);
-        $newBrand = [];
 
-        if ($brandName) {
+        $form = json_decode(file_get_contents('php://input'), true);
+        $brandName = $form['brand'];
+
+        $data = ['success' => false];
+
+        if (!empty($brandName)) {
             $brand = new Brand();
 
-            $newBrand['id'] = $brand->add($brandName);
+            $data['success'] = $brand->add($brandName);
         }
 
-        echo json_encode($newBrand);
+        echo json_encode($data);
+    }
+
+    public function del() {
+
+        $form = json_decode(file_get_contents('php://input'), true);
+        $id = intval(abs($form['id']));
+
+        $data = ['success' => false];
+
+        if ($id) {
+            $brand = new Brand();
+
+            $data['success'] = $brand->dell($id);
+        }
+
+        echo json_encode($data);
     }
 
 }

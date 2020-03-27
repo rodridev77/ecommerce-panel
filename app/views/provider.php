@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Brands</h1>
+                <h1 class="m-0 text-dark">Providers</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -24,21 +24,21 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Qtd. Produtos</th>
+                        <th scope="col">Qtd. Marcas</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($brands as $brand): ?>
-                        <?php extract($brand); ?>
+                    <?php foreach ($providers as $provider): ?>
+                        <?php extract($provider); ?>
                         <tr>
-                            <td data-name="" >Brand Name</td>
-                            <td data-qtty="" >Brand Item Quantity</td>
-                            <td><a class="btn btn-outline-warning btn-block edit" href="javascript:" onclick="brand_editform(<?php echo $id; ?>);" >Editar</a></td>
+                            <td data-name="" >Provider Name</td>
+                            <td data-qtty="" >Provider Item Quantity</td>
+                            <td><a class="btn btn-outline-warning btn-block edit" href="javascript:" onclick="prov_editform(<?php echo $id; ?>);" >Editar</a></td>
                             <td>
                                 <a class="btn btn-outline-danger btn-block" href="javascript:"
-                                   id="remove-brand" value="" onclick="brand_del(<?php echo $id; ?>);" >
+                                   id="remove-brand" value="" onclick="prov_del(<?php echo $id; ?>);" >
                                     Remover
                                 </a>
                             </td >
@@ -51,7 +51,7 @@
         <nav class="navbar">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:" onclick="brand_addform();">Nova Marca</a>
+                    <a class="nav-link" href="javascript:" onclick="prov_addform();">Novo Fornecedor</a>
                 </li>
             </ul>
         </nav>
@@ -59,7 +59,7 @@
 </div>
 <!-- /.content -->
 
-<?php $this->loadView("forms/", "brand_add"); ?>
-<?php $this->loadView("alerts/", "brand_alert"); ?>
+<?php $this->loadView("forms/", "provider_add"); ?>
+<?php $this->loadView("alerts/", "provider_alert"); ?>
 
-<script src="<?php echo BASE_URL ?>app/libs/js/brand.js"></script>
+<script src="<?php echo BASE_URL ?>app/libs/js/provider.js"></script>
