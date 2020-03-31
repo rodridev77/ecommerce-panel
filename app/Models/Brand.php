@@ -31,7 +31,7 @@ class Brand {
         return $brands;
     }
 
-    public function add($name) {
+    public function add($provider, $name) {
 
         try {
             $query = "INSERT INTO brand (name) VALUES (:name)";
@@ -39,8 +39,51 @@ class Brand {
             $stmt->bindValue(":name", $name, PDO::PARAM_STR);
 
             if ($stmt->execute()) {
+                $brandId = $this->conn->lastInsertId();
                 $stmt->closeCursor();
-                return true;
+
+
+                if (!empty(intval($brandId))) {
+                    $query = "INSERT INTO brand_provider (brand_id, provider_id) VALUES (:brand_id, :provider_id)";
+                    $stmt = $this->conn->prepare($query);
+                    $stmt->bindValue(":brand_id", $brandId, PDO::PARAM_INT);
+                    $stmt->bindValue(":provider_id", $provider, PDO::PARAM_INT);
+
+                    if ($stmt->execute()) {
+                        $stmt->closeCursor();
+                        return true;
+                    }
+                }
+            }
+        } catch (PDOException $e) {
+            die("Error: " . $e->getMessage());
+        }
+
+        return false;
+    }
+
+    public function update($provider, $brand, $name) {
+
+        try {
+            $query = "UPDATE brand WHERE (name) VALUES (:name) WHERE id = :brand_id";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(":name", $name, PDO::PARAM_STR);
+            $stmt->bindValue(":brand_id", $brand, PDO::PARAM_INT);
+
+            if ($stmt->execute()) {
+                $stmt->closeCursor();
+
+                if (!empty($brand)) {
+                    $query = "UPDATE brand_provider (provider_id) VALUES (:provider_id) WHERE brand_id = :brand_id";
+                    $stmt = $this->conn->prepare($query);
+                    $stmt->bindValue(":provider_id", $provider, PDO::PARAM_INT);
+                    $stmt->bindValue(":brand_id", $brand, PDO::PARAM_INT);
+
+                    if ($stmt->execute()) {
+                        $stmt->closeCursor();
+                        return true;
+                    }
+                }
             }
         } catch (PDOException $e) {
             die("Error: " . $e->getMessage());

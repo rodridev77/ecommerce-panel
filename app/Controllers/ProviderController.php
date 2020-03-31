@@ -19,6 +19,22 @@ class ProviderController extends Controller {
         $this->loadTemplate($viewPath, $viewName, $this->data);
     }
 
+    public function get() {
+
+        $form = json_decode(file_get_contents('php://input'), true);
+        $id = intval(abs($form['id']));
+
+        $data = ['success' => false];
+
+        if ($id) {
+            $prov = new Provider();
+
+            $data = $prov->get($id);
+        }
+
+        echo json_encode($data);
+    }
+
     public function add() {
 
         $form = json_decode(file_get_contents('php://input'), true);

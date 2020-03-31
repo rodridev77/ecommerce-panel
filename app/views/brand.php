@@ -35,13 +35,18 @@
                         <tr>
                             <td data-name="" >Brand Name</td>
                             <td data-qtty="" >Brand Item Quantity</td>
-                            <td><a class="btn btn-outline-warning btn-block edit" href="javascript:" onclick="brand_editform(<?php echo $id; ?>);" >Editar</a></td>
+                            <td>
+                                <?php $brand_update = array('providers' => $providers, 'id' => $id); ?>
+                                <a class="btn btn-outline-warning btn-block" href="javascript:" onclick='brand_updform(<?php echo json_encode($brand_update); ?>);' >
+                                    Editar
+                                </a>
+                            </td>
                             <td>
                                 <a class="btn btn-outline-danger btn-block" href="javascript:"
                                    id="remove-brand" value="" onclick="brand_del(<?php echo $id; ?>);" >
                                     Remover
                                 </a>
-                            </td >
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -51,7 +56,7 @@
         <nav class="navbar">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:" onclick="brand_addform();">Nova Marca</a>
+                    <a class="nav-link" href="javascript:" onclick='brand_addform(<?php echo json_encode($providers); ?>);'>Nova Marca</a>
                 </li>
             </ul>
         </nav>
@@ -60,6 +65,7 @@
 <!-- /.content -->
 
 <?php $this->loadView("forms/", "brand_add"); ?>
+<?php $this->loadView("forms/", "brand_update"); ?>
 <?php $this->loadView("alerts/", "brand_alert"); ?>
 
 <script src="<?php echo BASE_URL ?>app/libs/js/brand.js"></script>

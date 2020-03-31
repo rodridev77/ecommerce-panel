@@ -31,6 +31,26 @@ class Provider {
         return $brands;
     }
 
+    public function get($id) {
+        $provs = [];
+
+        try {
+            $query = "SELECT * FROM provider WHERE id = :id";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(":id", $id, PDO::PARAM_STR);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0):
+                $provs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $stmt->closeCursor();
+            endif;
+        } catch (PDOException $e) {
+            die("Error: " . $e->getMessage());
+        }
+
+        return $provs;
+    }
+
     public function add($name, $cnpj, $email, $phone) {
 
         try {

@@ -3,6 +3,7 @@
 namespace app\Controllers;
 
 use app\Core\Controller;
+use app\Models\Provider;
 use app\Models\Brand;
 
 class BrandController extends Controller {
@@ -10,10 +11,12 @@ class BrandController extends Controller {
     private $data = [];
 
     public function index() {
+        $prov = new Provider();
         $brand = new Brand();
         $viewPath = '';
         $viewName = "brand";
 
+        $this->data['providers'] = $prov->getAll();
         $this->data['brands'] = $brand->getAll();
 
         $this->loadTemplate($viewPath, $viewName, $this->data);
@@ -22,14 +25,32 @@ class BrandController extends Controller {
     public function add() {
 
         $form = json_decode(file_get_contents('php://input'), true);
+        $providerId = intval(abs($form['provider']));
         $brandName = $form['brand'];
 
         $data = ['success' => false];
 
-        if (!empty($brandName)) {
+        if (!empty($providerId) && !empty($brandName)) {
             $brand = new Brand();
 
-            $data['success'] = $brand->add($brandName);
+            $data['success'] = $brand->add($providerId, $brandName);
+        }
+
+        echo json_encode($data);
+    }
+
+    public function update() {
+
+        $form = json_decode(file_get_contents('php://input'), true);
+        $providerId = intval(abs($form['provider']));
+        $brandName = $form['brand'];
+
+        $data = ['success' => false];
+
+        if (!empty($providerId) && !empty($brandName)) {
+            $brand = new Brand();
+
+            $data['success'] = $brand->update($providerId, $brandName);
         }
 
         echo json_encode($data);

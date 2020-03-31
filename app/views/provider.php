@@ -35,13 +35,13 @@
                         <tr>
                             <td data-name="" >Provider Name</td>
                             <td data-qtty="" >Provider Item Quantity</td>
-                            <td><a class="btn btn-outline-warning btn-block edit" href="javascript:" onclick="prov_editform(<?php echo $id; ?>);" >Editar</a></td>
+                            <td><a class="btn btn-outline-warning btn-block edit" href="javascript:" onclick="prov_get(<?php echo $id; ?>);" >Editar</a></td>
                             <td>
                                 <a class="btn btn-outline-danger btn-block" href="javascript:"
                                    id="remove-brand" value="" onclick="prov_del(<?php echo $id; ?>);" >
                                     Remover
                                 </a>
-                            </td >
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -60,6 +60,7 @@
 <!-- /.content -->
 
 <?php $this->loadView("forms/", "provider_add"); ?>
+<?php $this->loadView("forms/", "provider_edit"); ?>
 <?php $this->loadView("alerts/", "provider_alert"); ?>
 
 <script src="<?php echo BASE_URL ?>app/libs/js/provider.js"></script>
