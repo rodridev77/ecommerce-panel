@@ -73,7 +73,7 @@ class Brand {
             if ($stmt->execute()) {
                 $stmt->closeCursor();
 
-                if (!empty($brand)) {
+                if (!empty($provider)) {
                     $query = "UPDATE brand_provider (provider_id) VALUES (:provider_id) WHERE brand_id = :brand_id";
                     $stmt = $this->conn->prepare($query);
                     $stmt->bindValue(":provider_id", $provider, PDO::PARAM_INT);

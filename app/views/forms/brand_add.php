@@ -17,7 +17,7 @@
                             <form method="POST" id="brand-form">
                                 <div class="form-group">
                                     <label for="brand-provider">Fornecedor</label>
-                                    <select class="form-control" id="brand-provider" name="brand"  required="">
+                                    <select class="form-control" id="brand-provider" name="brand-provider"  required="">
 
                                     </select>
                                 </div>

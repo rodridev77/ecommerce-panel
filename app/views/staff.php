@@ -1,4 +1,4 @@
-<?php $this->loadView("template/", "header_page", array("title" => "Brand")); ?>
+<?php $this->loadView("template/", "header_page", array("title" => "Staff")); ?>
 
 <!-- Main content -->
 <div class="content">
@@ -7,27 +7,24 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Qtd. Produtos</th>
+                        <th scope="col">Staff</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($brands as $brand): ?>
-                        <?php extract($brand); ?>
+                    <?php foreach ($staffs as $staff): ?>
+                        <?php extract($staff); ?>
                         <tr>
-                            <td data-name="" >Brand Name</td>
-                            <td data-qtty="" >Brand Item Quantity</td>
+                            <td data-name="" ><?php echo $name; ?></td>
                             <td>
-                                <?php $brand_update = array('providers' => $providers, 'brand' => $brand); ?>
-                                <a class="btn btn-outline-warning btn-block" href="javascript:" onclick='brand_updform(<?php echo json_encode($brand_update); ?>);' >
+                                <a class="btn btn-outline-warning btn-block" href="javascript:" onclick='staff_updform(<?php echo json_encode($staff); ?>);' >
                                     Editar
                                 </a>
                             </td>
                             <td>
                                 <a class="btn btn-outline-danger btn-block" href="javascript:"
-                                   id="remove-brand" value="" onclick="brand_del(<?php echo $id; ?>);" >
+                                   id="remove-brand" value="" onclick="staff_del(<?php echo $id; ?>);" >
                                     Remover
                                 </a>
                             </td>
@@ -40,7 +37,7 @@
         <nav class="navbar">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:" onclick='brand_addform(<?php echo json_encode($providers); ?>);'>Nova Marca</a>
+                    <a class="nav-link" href="javascript:" onclick='staff_addform();'>Novo Staff</a>
                 </li>
             </ul>
         </nav>
@@ -48,8 +45,8 @@
 </div>
 <!-- /.content -->
 
-<?php $this->loadView("forms/", "brand_add"); ?>
-<?php $this->loadView("forms/", "brand_update"); ?>
-<?php $this->loadView("alerts/", "brand_alert"); ?>
+<?php $this->loadView("forms/", "staff_add"); ?>
+<?php $this->loadView("forms/", "staff_update"); ?>
+<?php $this->loadView("alerts/", "staff_alert"); ?>
 
-<script src="<?php echo BASE_URL ?>app/libs/js/brand.js"></script>
+<script src="<?php echo BASE_URL ?>app/libs/js/staff.js"></script>

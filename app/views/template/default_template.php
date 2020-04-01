@@ -87,8 +87,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="#home" class="nav-link active">
+                                        <a href="<?php echo BASE_URL ?>home" class="nav-link active">
                                             <p>Início</p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="<?php echo BASE_URL ?>brand" class="nav-link active">
+                                            <p>Brands</p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="<?php echo BASE_URL ?>staff" class="nav-link active">
+                                            <p>Staffs</p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="<?php echo BASE_URL ?>role" class="nav-link active">
+                                            <p>Roles</p>
                                         </a>
                                     </li>
                                 </ul>

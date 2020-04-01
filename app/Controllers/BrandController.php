@@ -26,11 +26,11 @@ class BrandController extends Controller {
 
         $form = json_decode(file_get_contents('php://input'), true);
         $providerId = intval(abs($form['provider']));
-        $brandName = $form['brand'];
+        $brandName = filter_var($form['brand'], FILTER_SANITIZE_STRING);
 
         $data = ['success' => false];
 
-        if (!empty($providerId) && !empty($brandName)) {
+        if ($providerId && $brandName) {
             $brand = new Brand();
 
             $data['success'] = $brand->add($providerId, $brandName);
@@ -43,14 +43,15 @@ class BrandController extends Controller {
 
         $form = json_decode(file_get_contents('php://input'), true);
         $providerId = intval(abs($form['provider']));
-        $brandName = $form['brand'];
+        $id = intval(abs($form['id']));
+        $brandName = filter_var($form['brand'], FILTER_SANITIZE_STRING);
 
         $data = ['success' => false];
 
-        if (!empty($providerId) && !empty($brandName)) {
+        if ($providerId && $brandName && $id) {
             $brand = new Brand();
 
-            $data['success'] = $brand->update($providerId, $brandName);
+            $data['success'] = $brand->update($providerId, $id, $brandName);
         }
 
         echo json_encode($data);

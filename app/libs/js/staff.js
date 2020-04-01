@@ -1,50 +1,33 @@
 const BASE_URL = "http://localhost/ecommerce-panel/";
 
 // ############# CRUD Brand #############
-function brand_addform(providers) {
+function staff_addform() {
 
-    let option = '';
-
-    for (var i in providers) {
-        option += "<option value='" + providers[i].id + "' >" + providers[i].name + "</option>";
-    }
-
-    $('#brand-addform').find("#brand-provider").html(option);
-
-    $('#brand-addform').modal('show');
+    $('#staff-addform').modal('show');
 }
 
-function brand_updform(data) {
+function staff_updform(data) {
+    $('#staff-updform').modal('show');
 
-    let option = '';
-    let providers = data.providers;
+    document.querySelector("#staff-id").value = data.id;
 
-    for (var i in providers) {
-        option += "<option value='" + providers[i].id + "' >" + providers[i].name + "</option>";
-    }
+    //let form = document.querySelector("#staff-form");
+    document.querySelector("#staff-name").value = data.name;
 
-    let form = document.querySelector("#brand-form");
-    let brand_name = form.querySelector("#brand-name").value = data.brand.name;
-    //let brand_id = form.querySelector("#brand-id").value = data.brand.id;
-    $('#brand-updform').find("#brand-provider").html(option);
-
-    $('#brand-updform').modal('show');
 }
 
-function brand_add() {
+function staff_add() {
 
-    document.querySelector('#brand-form').addEventListener('submit', event => {
+    document.querySelector('#staff-form').addEventListener('submit', event => {
         event.preventDefault();
     });
 
-    let brand = document.querySelector("#brand-name");
-    let provider = document.querySelector("#brand-provider");
+    let staff = document.querySelector("#staff-name");
 
-    if (brand) {
+    if (staff) {
 
         let data = {
-            brand: brand.value,
-            provider: provider.value
+            staff: staff.value
         };
 
         let options = {
@@ -55,33 +38,33 @@ function brand_add() {
             }
         };
 
-        if (data.brand.length !== 0) {
-            const URL = BASE_URL + 'brand/add';
+        if (staff.length !== 0) {
+            const URL = BASE_URL + 'staff/add';
             fetch(URL, options)
                     .then(function() {
 
-                        let message = "brand registered successfully";
-                        let modal = document.querySelector('#brand-alert');
+                        let message = "staff registered successfully";
+                        let modal = document.querySelector('#staff-alert');
 
                         modal.querySelector('#alert-class').classList.add('alert-success');
                         modal.querySelector('#alert-class').textContent = message;
-                        $('#brand-alert').modal('show');
+                        $('#staff-alert').modal('show');
 
-                        $('#brand-alert').on('hide.bs.modal', function() {
+                        $('#staff-alert').on('hide.bs.modal', function() {
                             window.location.reload();
                         });
 
                     })
                     .catch(function() {
 
-                        let message = "brand registration failed";
-                        let modal = document.querySelector('#brand-alert');
+                        let message = "staff registration failed";
+                        let modal = document.querySelector('#staff-alert');
 
                         modal.querySelector('#alert-class').classList.add('alert-warning');
                         modal.querySelector('#alert-class').textContent = message;
-                        $('#brand-alert').modal('show');
+                        $('#staff-alert').modal('show');
 
-                        $('#brand-alert').on('hide.bs.modal', function() {
+                        $('#staff-alert').on('hide.bs.modal', function() {
                             window.location.reload();
                         });
 
@@ -91,25 +74,23 @@ function brand_add() {
 
 }
 
-function brand_update() {
+function staff_update() {
 
-    document.querySelector('#brand-form').addEventListener('submit', event => {
+    document.querySelector('#staff-form').addEventListener('submit', event => {
         event.preventDefault();
     });
 
-    let id = document.querySelector("#brand-id");
-    let brand = document.querySelector("#brand-name");
-    let provider = document.querySelector("#brand-provider");
 
-    if (id) {
+    let id = document.querySelector("#staff-id");
+    let staff = document.querySelector("#staff-name");
+    console.log(staff);
 
+    if (id.value) {
 
         let data = {
-            brand: brand.value,
-            provider: provider.value
+            id: id.value,
+            staff: staff.value
         };
-
-        alert(data.brand);
 
         let options = {
             method: 'POST',
@@ -119,35 +100,33 @@ function brand_update() {
             }
         };
 
-        if (data.brand.length !== 0) {
-            alert("alert");
-
-            const URL = BASE_URL + 'brand/update';
+        if (staff.length !== 0) {
+            const URL = BASE_URL + 'staff/update';
             fetch(URL, options)
                     .then(function() {
 
-                        let message = "brand updatered successfully";
-                        let modal = document.querySelector('#brand-alert');
+                        let message = "staff updated successfully";
+                        let modal = document.querySelector('#staff-alert');
 
                         modal.querySelector('#alert-class').classList.add('alert-success');
                         modal.querySelector('#alert-class').textContent = message;
-                        $('#brand-alert').modal('show');
+                        $('#staff-alert').modal('show');
 
-                        $('#brand-alert').on('hide.bs.modal', function() {
+                        $('#staff-alert').on('hide.bs.modal', function() {
                             window.location.reload();
                         });
 
                     })
                     .catch(function() {
 
-                        let message = "brand update failed";
-                        let modal = document.querySelector('#brand-alert');
+                        let message = "staff updated failed";
+                        let modal = document.querySelector('#staff-alert');
 
                         modal.querySelector('#alert-class').classList.add('alert-warning');
                         modal.querySelector('#alert-class').textContent = message;
-                        $('#brand-alert').modal('show');
+                        $('#staff-alert').modal('show');
 
-                        $('#brand-alert').on('hide.bs.modal', function() {
+                        $('#staff-alert').on('hide.bs.modal', function() {
                             window.location.reload();
                         });
 
