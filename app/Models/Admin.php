@@ -1,10 +1,10 @@
 <?php
 
-namespace Models;
+namespace app\Models;
 
-use Core\Connection;
-use PDO;
-use Models\Permission;
+use app\Core\Connection;
+use \PDO;
+use app\Models\Permission;
 
 class Admin {
 
@@ -24,7 +24,7 @@ class Admin {
             $token = $_SESSION['token_admin'];
 
             try {
-                $query = "SELECT id, permission_group_id, name, permission_group_id FROM user WHERE token = :token";
+                $query = "SELECT id, permission_group_id, name, permission_group_id FROM admin WHERE token = :token";
                 $stmt = $this->conn->prepare($query);
                 $stmt->bindValue(":token", $token, PDO::PARAM_STR);
                 $stmt->execute();
@@ -71,22 +71,37 @@ class Admin {
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
-                $uid = $stmt->fetch(PDO::FETCH_ASSOC)['id'];
-                $token = md5(time() . rand(0, 99999) . $uid);
+                $id = $stmt->fetch(PDO::FETCH_ASSOC)['id'];
+                $stmt->closeCursor();
 
-                $query = "UPDATE user SET token = :token WHERE id = :id";
-                $stmt = $this->conn->prepare($query);
-                $stmt->bindValue(":token", $token, PDO::PARAM_STR);
-                $stmt->bindValue(":id", $uid, PDO::PARAM_INT);
-
-                if ($stmt->execute()):
-                    $_SESSION['user_token'] = $token;
+                if ($this->setToken($id)):
                     return true;
                 endif;
             }
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-            die;
+            die("Error: " . $e->getMessage());
+        }
+
+        return false;
+    }
+
+    public function setToken($id) {
+        try {
+
+            $token = md5(time() . rand(0, 99999) . $id);
+
+            $query = "UPDATE admin SET token = :token WHERE id = :id";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(":token", $token, PDO::PARAM_STR);
+            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+
+            if ($stmt->execute()):
+                $stmt->closeCursor();
+                $_SESSION['user_token'] = $token;
+                return true;
+            endif;
+        } catch (PDOException $e) {
+            die("Error: " . $e->getMessage());
         }
 
         return false;
